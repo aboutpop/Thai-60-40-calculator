@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คำนวณไทยช่วยไทยพลัส</title>
-    <!-- นำเข้าฟอนต์ Noto Sans Thai จาก Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -68,10 +67,13 @@
             box-shadow: 0 0 0 4px rgba(26, 115, 232, 0.15);
             outline: none;
         }
+        /* กลุ่มครอบกล่องผลลัพธ์เพื่อใช้จัดวางตัวหนังสือคำเตือนด้านล่าง */
+        .result-wrapper {
+            margin-top: 14px;
+        }
         /* แยกกล่องผลลัพธ์เป็นสัดส่วนสไตล์ Minimal */
         .result-box {
             padding: 16px;
-            margin-top: 14px;
             border-radius: 10px;
             display: flex;
             justify-content: space-between;
@@ -109,6 +111,15 @@
             font-weight: 700;
             color: #2ea44f;
         }
+        /* สไตล์ตัวหนังสือคำเตือนสีแดงขนาดเล็ก */
+        .warning-text {
+            color: #d93025;
+            font-size: 11px;
+            margin-top: 6px;
+            margin-left: 4px;
+            display: none; /* ซ่อนไว้ก่อนเริ่มต้น */
+            font-weight: 400;
+        }
     </style>
 </head>
 <body>
@@ -121,16 +132,20 @@
         <input type="number" id="inputZ" placeholder="กรอกจำนวนเงินรวม..." oninput="calculateXYZ()">
     </div>
 
-    <!-- แถว X สีน้ำเงิน -->
-    <div class="result-box box-x">
-        <span class="label-x">เงินเราที่เค้าแบ่งให้ (X - 60%)</span>
-        <span class="value-x" id="resultX">0.00</span>
+    <div class="result-wrapper">
+        <div class="result-box box-x">
+            <span class="label-x">เงินเราที่เค้าแบ่งให้ (X - 60%)</span>
+            <span class="value-x" id="resultX">0.00</span>
+        </div>
+        <div id="warningX" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
     </div>
 
-    <!-- แถว Y สีเขียว -->
-    <div class="result-box box-y">
-        <span class="label-y">เงินที่เราเพิ่ม (Y - 40%)</span>
-        <span class="value-y" id="resultY">0.00</span>
+    <div class="result-wrapper">
+        <div class="result-box box-y">
+            <span class="label-y">เงินที่เราเพิ่ม (Y - 40%)</span>
+            <span class="value-y" id="resultY">0.00</span>
+        </div>
+        <div id="warningY" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
     </div>
 </div>
 
@@ -141,6 +156,8 @@ function calculateXYZ() {
     if (isNaN(z) || z <= 0) {
         document.getElementById('resultX').innerText = "0.00";
         document.getElementById('resultY').innerText = "0.00";
+        document.getElementById('warningX').style.display = "none";
+        document.getElementById('warningY').style.display = "none";
         return;
     }
 
@@ -151,9 +168,24 @@ function calculateXYZ() {
     let x_ceil = (Math.ceil(x * 100) / 100).toFixed(2);
     let y_ceil = (Math.ceil(y * 100) / 100).toFixed(2);
 
-    // แสดงผลลัพธ์
+    // แสดงผลลัพธ์ตัวเลข
     document.getElementById('resultX').innerText = x_ceil;
     document.getElementById('resultY').innerText = y_ceil;
+
+    // ตรวจสอบเงื่อนไขการปัดขึ้นของค่า X เพื่อแสดง/ซ่อนคำเตือน
+    // โดยแปลงค่าที่ปัดแล้วเป็นตัวเลขมาเทียบกับค่าเดิมที่ยังไม่ปัดเศษ (ตัดปัญหาความคลาดเคลื่อนด้วย toFixed(4))
+    if (parseFloat(x_ceil) > parseFloat(x.toFixed(4))) {
+        document.getElementById('warningX').style.display = "block";
+    } else {
+        document.getElementById('warningX').style.display = "none";
+    }
+
+    // ตรวจสอบเงื่อนไขการปัดขึ้นของค่า Y เพื่อแสดง/ซ่อนคำเตือน
+    if (parseFloat(y_ceil) > parseFloat(y.toFixed(4))) {
+        document.getElementById('warningY').style.display = "block";
+    } else {
+        document.getElementById('warningY').style.display = "none";
+    }
 }
 </script>
 
