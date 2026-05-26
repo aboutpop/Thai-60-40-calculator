@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวนไทยช่วยไทยพลัส</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-radius;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .result-group {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+        .value {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>คำนวนไทยช่วยไทยพลัส</h2>
+    
+    <div class="input-group">
+        <label for="inputZ">ราคาสินค้ารวม (Z):</label>
+        <input type="number" id="inputZ" placeholder="ใส่จำนวนเงินตรงนี้..." oninput="calculateXYZ()">
+    </div>
+
+    <div class="result-group">
+        <div class="result-item">
+            <span>เงินเราที่เค้าแบ่งให้ (X - 60%):</span>
+            <span class="value" id="resultX">0.00</span>
+        </div>
+        <div class="result-item">
+            <span>เงินที่เราเพิ่ม (Y - 40%):</span>
+            <span class="value" id="resultY">0.00</span>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateXYZ() {
+    // ดึงค่า Z จากช่องกรอกข้อมูล
+    let z = parseFloat(document.getElementById('inputZ').value);
+    
+    if (isNaN(z) || z <= 0) {
+        document.getElementById('resultX').innerText = "0.00";
+        document.getElementById('resultY').innerText = "0.00";
+        return;
+    }
+
+    // คำนวณค่า X (60%) และ Y (40%) จาก Z (100%)
+    let x = z * 0.60;
+    let y = z * 0.40;
+
+    // ฟังก์ชันสำหรับปัดเศษทศนิยมขึ้นเสมอให้เหลือ 2 ตำแหน่ง
+    // ใช้สูตร Math.ceil(สูตร * 100) / 100 เพื่อเลื่อนจุด ปัดขึ้น แล้วเลื่อนจุดกลับ
+    let x_ceil = (Math.ceil(x * 100) / 100).toFixed(2);
+    let y_ceil = (Math.ceil(y * 100) / 100).toFixed(2);
+
+    // แสดงผลลัพธ์บนหน้าเว็บ
+    document.getElementById('resultX').innerText = x_ceil;
+    document.getElementById('resultY').innerText = y_ceil;
+}
+</script>
+
+</body>
+</html>
