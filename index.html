@@ -16,12 +16,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .container {
             background-color: #ffffff;
-            padding: 35px 30px;
+            padding: 35px 30px 25px 30px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
             width: 100%;
@@ -38,14 +40,12 @@
             font-weight: 700;
             letter-spacing: -0.5px;
         }
-        /* โครงสร้างกลุ่มแถวที่เหมือนกันทั้ง 3 แถว */
         .row-group {
             margin-bottom: 20px;
         }
         .row-group:last-child {
             margin-bottom: 0;
         }
-        /* ดีไซน์กล่องที่มีความคล้ายคลึงกัน (Identity เดียวกัน) */
         .calc-box {
             padding: 14px 16px;
             border-radius: 12px;
@@ -63,7 +63,6 @@
             white-space: nowrap;
             margin-right: 10px;
         }
-        /* ส่วนฝั่งขวา: ช่องกรอกตัวเลข + หน่วยบาท */
         .input-wrapper {
             display: flex;
             align-items: center;
@@ -90,7 +89,6 @@
             outline: none;
             box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
         }
-        /* ซ่อนลูกศรของ input number */
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -99,7 +97,6 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
-
         .unit-text {
             font-size: 14px;
             font-weight: 500;
@@ -136,7 +133,6 @@
             color: #2ea44f;
         }
 
-        /* สไตล์ตัวหนังสือคำเตือนสีแดงขนาดเล็ก */
         .warning-text {
             color: #d93025;
             font-size: 11px;
@@ -145,128 +141,34 @@
             display: none;
             font-weight: 400;
         }
-    </style>
-</head>
-<body>
 
-<div class="container">
-    <h2>คำนวณ60-40ไทยช่วยไทยพลัส</h2>
-    
-    <div class="row-group">
-        <div class="calc-box box-z">
-            <span class="label-text">ราคาสินค้ารวม (Z)</span>
-            <div class="input-wrapper">
-                <input type="number" id="inputZ" placeholder="0.00" step="any" oninput="calculateFromZ()">
-                <span class="unit-text">บาท</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="row-group">
-        <div class="calc-box box-x">
-            <span class="label-text">เงินเราที่เค้าแบ่งให้ (X - 60%)</span>
-            <div class="input-wrapper">
-                <input type="number" id="inputX" placeholder="0.00" step="any" oninput="calculateFromX()">
-                <span class="unit-text">บาท</span>
-            </div>
-        </div>
-        <div id="warningX" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
-    </div>
-
-    <div class="row-group">
-        <div class="calc-box box-y">
-            <span class="label-text">เงินที่เราเพิ่ม (Y - 40%)</span>
-            <div class="input-wrapper">
-                <input type="number" id="inputY" placeholder="0.00" step="any" oninput="calculateFromY()">
-                <span class="unit-text">บาท</span>
-            </div>
-        </div>
-        <div id="warningY" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
-    </div>
-</div>
-
-<script>
-// ฟังก์ชันล้างค่าเมื่อไม่มีการกรอกข้อมูล
-function clearAll() {
-    document.getElementById('inputZ').value = "";
-    document.getElementById('inputX').value = "";
-    document.getElementById('inputY').value = "";
-    document.getElementById('warningX').style.display = "none";
-    document.getElementById('warningY').style.display = "none";
-}
-
-// เช็กและแสดงคำเตือนการปัดเศษ
-function checkWarnings(xReal, xCeil, yReal, yCeil) {
-    if (parseFloat(xCeil) > parseFloat(xReal.toFixed(4))) {
-        document.getElementById('warningX').style.display = "block";
-    } else {
-        document.getElementById('warningX').style.display = "none";
-    }
-
-    if (parseFloat(yCeil) > parseFloat(yReal.toFixed(4))) {
-        document.getElementById('warningY').style.display = "block";
-    } else {
-        document.getElementById('warningY').style.display = "none";
-    }
-}
-
-// 1. เมื่อแก้ไขช่อง Z (ราคาสินค้ารวม)
-function calculateFromZ() {
-    let z = parseFloat(document.getElementById('inputZ').value);
-    if (isNaN(z) || z <= 0) { clearAll(); return; }
-
-    let x = z * 0.60;
-    let y = z * 0.40;
-
-    let x_ceil = (Math.ceil(x * 100) / 100).toFixed(2);
-    let y_ceil = (Math.ceil(y * 100) / 100).toFixed(2);
-
-    document.getElementById('inputX').value = x_ceil;
-    document.getElementById('inputY').value = y_ceil;
-
-    checkWarnings(x, x_ceil, y, y_ceil);
-}
-
-// 2. เมื่อแก้ไขช่อง X (เงินเราที่เค้าแบ่งให้)
-function calculateFromX() {
-    let x = parseFloat(document.getElementById('inputX').value);
-    if (isNaN(x) || x <= 0) { clearAll(); return; }
-
-    // คำนวณย้อนกลับหา Z จากสัดส่วน 60%
-    let z = x / 0.60;
-    // Y คือ 40% ของ Z ที่คำนวณได้
-    let y = z * 0.40;
-
-    let z_ceil = (Math.ceil(z * 100) / 100).toFixed(2);
-    let y_ceil = (Math.ceil(y * 100) / 100).toFixed(2);
-
-    document.getElementById('inputZ').value = z_ceil;
-    document.getElementById('inputY').value = y_ceil;
-
-    // ตรวจสอบการปัดเศษ (กรณีพิมพ์เอง X จะตรงตัว จึงเช็กส่วนที่คำนวณอัตโนมัติ)
-    checkWarnings(x, x.toFixed(2), y, y_ceil);
-}
-
-// 3. เมื่อแก้ไขช่อง Y (เงินที่เราเพิ่ม)
-function calculateFromY() {
-    let y = parseFloat(document.getElementById('inputY').value);
-    if (isNaN(y) || y <= 0) { clearAll(); return; }
-
-    // คำนวณย้อนกลับหา Z จากสัดส่วน 40%
-    let z = y / 0.40;
-    // X คือ 60% ของ Z ที่คำนวณได้
-    let x = z * 0.60;
-
-    let z_ceil = (Math.ceil(z * 100) / 100).toFixed(2);
-    let x_ceil = (Math.ceil(x * 100) / 100).toFixed(2);
-
-    document.getElementById('inputZ').value = z_ceil;
-    document.getElementById('inputX').value = x_ceil;
-
-    // ตรวจสอบการปัดเศษ
-    checkWarnings(x, x_ceil, y, y.toFixed(2));
-}
-</script>
-
-</body>
-</html>
+        /* --- ส่วนเครดิตด้านล่างสไตล์ Minimal --- */
+        .footer-credit {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px dashed #e2e8f0;
+            text-align: center;
+        }
+        .credit-by {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 12px;
+        }
+        .credit-by strong {
+            color: #4a5568;
+            font-weight: 700;
+        }
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        /* ดีไซน์ป้ายแท็กข้อความแบบแอปพลิเคชันสมัยใหม่ */
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #f1f3f5;
+            color
