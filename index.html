@@ -18,16 +18,16 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             box-sizing: border-box;
         }
         .container {
             background-color: #ffffff;
-            padding: 35px 30px 25px 30px;
+            padding: 30px 20px 25px 20px;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
             width: 100%;
-            max-width: 420px;
+            max-width: 360px; /* ปรับขนาดให้พอดีหน้าจอมือถือแนวตั้ง */
             box-sizing: border-box;
             border: 1px solid #eaeaea;
         }
@@ -35,19 +35,19 @@
             text-align: center;
             color: #1a1f36;
             margin-top: 0;
-            margin-bottom: 30px;
-            font-size: 22px;
+            margin-bottom: 25px;
+            font-size: 20px;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
         .row-group {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .row-group:last-child {
             margin-bottom: 0;
         }
         .calc-box {
-            padding: 14px 16px;
+            padding: 12px 14px;
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
@@ -55,27 +55,26 @@
             background-color: #ffffff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             box-sizing: border-box;
-            transition: all 0.2s ease;
         }
         .label-text {
             font-weight: 500;
-            font-size: 14px;
+            font-size: 13px; /* ปรับขนาดตัวหนังสือเล็กเล็กน้อยเพื่อความมินิมอลบนมือถือ */
             white-space: nowrap;
-            margin-right: 10px;
+            margin-right: 8px;
         }
         .input-wrapper {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-grow: 1;
             justify-content: flex-end;
         }
         input[type="number"] {
-            width: 120px;
-            padding: 6px 10px;
+            width: 105px;
+            padding: 6px 8px;
             border: 1px solid transparent;
             border-radius: 6px;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             font-family: 'Noto Sans Thai', sans-serif;
             text-align: right;
@@ -98,12 +97,12 @@
             -moz-appearance: textfield;
         }
         .unit-text {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            width: 30px;
+            width: 25px;
         }
 
-        /* 1. แถว Z - สีชมพูเข้ม */
+        /* แถว ราคาสินค้ารวม - สีชมพูเข้ม */
         .box-z {
             border: 1px solid #fce4ec;
             border-left: 6px solid #c2185b;
@@ -113,7 +112,7 @@
             color: #c2185b;
         }
 
-        /* 2. แถว X - สีน้ำเงิน */
+        /* แถว เงินเราที่รัฐแบ่งให้ - สีน้ำเงิน */
         .box-x {
             border: 1px solid #e8f0fe;
             border-left: 6px solid #1a73e8;
@@ -123,7 +122,7 @@
             color: #1a73e8;
         }
 
-        /* 3. แถว Y - สีเขียว */
+        /* แถว เงินสมทบของเรา - สีเขียว */
         .box-y {
             border: 1px solid #e6f4ea;
             border-left: 6px solid #2ea44f;
@@ -136,23 +135,22 @@
         .warning-text {
             color: #d93025;
             font-size: 11px;
-            margin-top: 5px;
+            margin-top: 4px;
             margin-left: 4px;
             display: none;
             font-weight: 400;
         }
 
-        /* --- ส่วนเครดิตด้านล่างสไตล์ Minimal --- */
         .footer-credit {
-            margin-top: 35px;
-            padding-top: 20px;
+            margin-top: 30px;
+            padding-top: 15px;
             border-top: 1px dashed #e2e8f0;
             text-align: center;
         }
         .credit-by {
-            font-size: 12px;
+            font-size: 11px;
             color: #718096;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .credit-by strong {
             color: #4a5568;
@@ -162,34 +160,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
-        /* ดีไซน์ป้ายแท็กข้อความแบบแอปพลิเคชันสมัยใหม่ */
         .app-badge {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             background-color: #f1f3f5;
             color: #495057;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
             border: 1px solid #e9ecef;
         }
-        .app-badge .icon-shop {
-            font-size: 12px;
-        }
-        /* สไตล์ดึงรูปโลโก้สัญลักษณ์สากลของ Creative Commons */
         .cc-logo {
-            height: 20px;
+            height: 18px;
             opacity: 0.75;
-            transition: opacity 0.2s;
             display: block;
-        }
-        .cc-logo:hover {
-            opacity: 1;
         }
     </style>
 </head>
@@ -200,9 +189,9 @@
     
     <div class="row-group">
         <div class="calc-box box-z">
-            <span class="label-text">ราคาสินค้ารวม (Z)</span>
+            <span class="label-text">ราคาสินค้ารวม</span>
             <div class="input-wrapper">
-                <input type="number" id="inputZ" placeholder="0.00" step="any" oninput="calculateFromZ()">
+                <input type="number" id="inputZ" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromZ()">
                 <span class="unit-text">บาท</span>
             </div>
         </div>
@@ -210,9 +199,9 @@
 
     <div class="row-group">
         <div class="calc-box box-x">
-            <span class="label-text">เงินเราที่เค้าแบ่งให้ (X - 60%)</span>
+            <span class="label-text">เงินเราที่รัฐแบ่งให้ 60%</span>
             <div class="input-wrapper">
-                <input type="number" id="inputX" placeholder="0.00" step="any" oninput="calculateFromX()">
+                <input type="number" id="inputX" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromX()">
                 <span class="unit-text">บาท</span>
             </div>
         </div>
@@ -221,9 +210,9 @@
 
     <div class="row-group">
         <div class="calc-box box-y">
-            <span class="label-text">เงินที่เราเพิ่ม (Y - 40%)</span>
+            <span class="label-text">เงินสมทบของเรา 40%</span>
             <div class="input-wrapper">
-                <input type="number" id="inputY" placeholder="0.00" step="any" oninput="calculateFromY()">
+                <input type="number" id="inputY" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromY()">
                 <span class="unit-text">บาท</span>
             </div>
         </div>
@@ -234,9 +223,9 @@
         <div class="credit-by">พัฒนาโดย <strong>aboutpop</strong></div>
         <div class="badge-container">
             <span class="app-badge">
-                <span class="icon-shop">🏪</span> Free Application สำหรับร้านโชห่วย
+                <span>🏪</span> Free Application สำหรับร้านโชห่วย
             </span>
-            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="Creative Commons - Free to use">
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
                 <img class="cc-logo" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by.svg" alt="Creative Commons Free to Use">
             </a>
         </div>
@@ -244,6 +233,18 @@
 </div>
 
 <script>
+const MAX_VAL = 9999.99;
+
+// ฟังก์ชันจำกัดค่าไม่ให้เกิน 9999.99
+function enforceMaxLength(inputElement) {
+    let val = parseFloat(inputElement.value);
+    if (val > MAX_VAL) {
+        inputElement.value = MAX_VAL;
+        return MAX_VAL;
+    }
+    return val;
+}
+
 function clearAll() {
     document.getElementById('inputZ').value = "";
     document.getElementById('inputX').value = "";
@@ -267,7 +268,9 @@ function checkWarnings(xReal, xCeil, yReal, yCeil) {
 }
 
 function calculateFromZ() {
-    let z = parseFloat(document.getElementById('inputZ').value);
+    let inputZ = document.getElementById('inputZ');
+    let z = enforceMaxLength(inputZ);
+    
     if (isNaN(z) || z <= 0) { clearAll(); return; }
 
     let x = z * 0.60;
@@ -283,10 +286,17 @@ function calculateFromZ() {
 }
 
 function calculateFromX() {
-    let x = parseFloat(document.getElementById('inputX').value);
+    let inputX = document.getElementById('inputX');
+    let x = enforceMaxLength(inputX);
+    
     if (isNaN(x) || x <= 0) { clearAll(); return; }
 
     let z = x / 0.60;
+    if (z > MAX_VAL) {
+        z = MAX_VAL;
+        x = z * 0.60;
+        inputX.value = (Math.ceil(x * 100) / 100).toFixed(2);
+    }
     let y = z * 0.40;
 
     let z_ceil = (Math.ceil(z * 100) / 100).toFixed(2);
@@ -295,14 +305,21 @@ function calculateFromX() {
     document.getElementById('inputZ').value = z_ceil;
     document.getElementById('inputY').value = y_ceil;
 
-    checkWarnings(x, x.toFixed(2), y, y_ceil);
+    checkWarnings(x, parseFloat(inputX.value), y, y_ceil);
 }
 
 function calculateFromY() {
-    let y = parseFloat(document.getElementById('inputY').value);
+    let inputY = document.getElementById('inputY');
+    let y = enforceMaxLength(inputY);
+    
     if (isNaN(y) || y <= 0) { clearAll(); return; }
 
     let z = y / 0.40;
+    if (z > MAX_VAL) {
+        z = MAX_VAL;
+        y = z * 0.40;
+        inputY.value = (Math.ceil(y * 100) / 100).toFixed(2);
+    }
     let x = z * 0.60;
 
     let z_ceil = (Math.ceil(z * 100) / 100).toFixed(2);
@@ -311,7 +328,7 @@ function calculateFromY() {
     document.getElementById('inputZ').value = z_ceil;
     document.getElementById('inputX').value = x_ceil;
 
-    checkWarnings(x, x_ceil, y, y.toFixed(2));
+    checkWarnings(x, x_ceil, y, parseFloat(inputY.value));
 }
 </script>
 
