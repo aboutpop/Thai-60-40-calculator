@@ -27,7 +27,7 @@
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
             width: 100%;
-            max-width: 360px; /* ปรับขนาดให้พอดีหน้าจอมือถือแนวตั้ง */
+            max-width: 360px; /* ขนาดพอดีมือถือแนวตั้ง */
             box-sizing: border-box;
             border: 1px solid #eaeaea;
         }
@@ -58,7 +58,7 @@
         }
         .label-text {
             font-weight: 500;
-            font-size: 13px; /* ปรับขนาดตัวหนังสือเล็กเล็กน้อยเพื่อความมินิมอลบนมือถือ */
+            font-size: 13px;
             white-space: nowrap;
             margin-right: 8px;
         }
@@ -102,35 +102,14 @@
             width: 25px;
         }
 
-        /* แถว ราคาสินค้ารวม - สีชมพูเข้ม */
-        .box-z {
-            border: 1px solid #fce4ec;
-            border-left: 6px solid #c2185b;
-            background-color: #fff8f9;
-        }
-        .box-z .label-text, .box-z .unit-text, .box-z input {
-            color: #c2185b;
-        }
+        .box-z { border: 1px solid #fce4ec; border-left: 6px solid #c2185b; background-color: #fff8f9; }
+        .box-z .label-text, .box-z .unit-text, .box-z input { color: #c2185b; }
 
-        /* แถว เงินเราที่รัฐแบ่งให้ - สีน้ำเงิน */
-        .box-x {
-            border: 1px solid #e8f0fe;
-            border-left: 6px solid #1a73e8;
-            background-color: #f8faff;
-        }
-        .box-x .label-text, .box-x .unit-text, .box-x input {
-            color: #1a73e8;
-        }
+        .box-x { border: 1px solid #e8f0fe; border-left: 6px solid #1a73e8; background-color: #f8faff; }
+        .box-x .label-text, .box-x .unit-text, .box-x input { color: #1a73e8; }
 
-        /* แถว เงินสมทบของเรา - สีเขียว */
-        .box-y {
-            border: 1px solid #e6f4ea;
-            border-left: 6px solid #2ea44f;
-            background-color: #f4faf6;
-        }
-        .box-y .label-text, .box-y .unit-text, .box-y input {
-            color: #2ea44f;
-        }
+        .box-y { border: 1px solid #e6f4ea; border-left: 6px solid #2ea44f; background-color: #f4faf6; }
+        .box-y .label-text, .box-y .unit-text, .box-y input { color: #2ea44f; }
 
         .warning-text {
             color: #d93025;
@@ -141,82 +120,248 @@
             font-weight: 400;
         }
 
+        .btn-save {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a1f36;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        .btn-save:active {
+            background-color: #333d66;
+        }
+
+        .summary-box {
+            margin-top: 20px;
+            background-color: #f1f3f5;
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid #e9ecef;
+        }
+        .summary-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #495057;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-clear-summary {
+            background: none;
+            border: none;
+            color: #d93025;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 0;
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            color: #212529;
+        }
+        .summary-left {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .summary-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1f36;
+        }
+
+        /* ปุ่มสรุป และ ปุ่มย้อนกลับ มินิมอล */
+        .btn-toggle-view {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            color: #495057;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-family: 'Noto Sans Thai', sans-serif;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-toggle-view:active {
+            background-color: #e9ecef;
+        }
+
+        /* ส่วนหน้าจอรายงานสรุปผล (ซ่อนไว้เริ่มต้น) */
+        #reportView {
+            display: none;
+        }
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .report-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1f36;
+        }
+        
+        /* สไตล์ตารางสรุปรายการ */
+        .table-wrapper {
+            max-height: 280px;
+            overflow-y: auto;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            text-align: right;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #f1f3f5;
+            color: #495057;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+        th:first-child, td:first-child {
+            text-align: center;
+            width: 35px;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .text-pink { color: #c2185b; font-weight: 700; }
+        .text-blue { color: #1a73e8; }
+        .text-green { color: #2ea44f; }
+        .empty-row {
+            text-align: center !important;
+            color: #adb5bd;
+            padding: 30px 10px;
+        }
+
         .footer-credit {
-            margin-top: 30px;
+            margin-top: 25px;
             padding-top: 15px;
             border-top: 1px dashed #e2e8f0;
             text-align: center;
         }
-        .credit-by {
-            font-size: 11px;
-            color: #718096;
-            margin-bottom: 10px;
-        }
-        .credit-by strong {
-            color: #4a5568;
-            font-weight: 700;
-        }
-        .badge-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .app-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background-color: #f1f3f5;
-            color: #495057;
-            padding: 3px 8px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 500;
-            border: 1px solid #e9ecef;
-        }
-        .cc-logo {
-            height: 18px;
-            opacity: 0.75;
-            display: block;
-        }
+        .credit-by { font-size: 11px; color: #718096; margin-bottom: 10px; }
+        .credit-by strong { color: #4a5568; font-weight: 700; }
+        .badge-container { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .app-badge { display: inline-flex; align-items: center; gap: 4px; background-color: #f1f3f5; color: #495057; padding: 3px 8px; border-radius: 20px; font-size: 10px; font-weight: 500; border: 1px solid #e9ecef; }
+        .cc-logo { height: 18px; opacity: 0.75; display: block; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>คำนวณ60-40ไทยช่วยไทยพลัส</h2>
     
-    <div class="row-group">
-        <div class="calc-box box-z">
-            <span class="label-text">ราคาสินค้ารวม</span>
-            <div class="input-wrapper">
-                <input type="number" id="inputZ" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromZ()">
-                <span class="unit-text">บาท</span>
+    <div id="calculatorView">
+        <h2>คำนวณ60-40ไทยช่วยไทยพลัส</h2>
+        
+        <div class="row-group">
+            <div class="calc-box box-z">
+                <span class="label-text">ราคาสินค้ารวม</span>
+                <div class="input-wrapper">
+                    <input type="number" id="inputZ" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromZ()">
+                    <span class="unit-text">บาท</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-group">
+            <div class="calc-box box-x">
+                <span class="label-text">เงินเราที่รัฐแบ่งให้ 60%</span>
+                <div class="input-wrapper">
+                    <input type="number" id="inputX" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromX()">
+                    <span class="unit-text">บาท</span>
+                </div>
+            </div>
+            <div id="warningX" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
+        </div>
+
+        <div class="row-group">
+            <div class="calc-box box-y">
+                <span class="label-text">เงินสมทบของเรา 40%</span>
+                <div class="input-wrapper">
+                    <input type="number" id="inputY" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromY()">
+                    <span class="unit-text">บาท</span>
+                </div>
+            </div>
+            <div id="warningY" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
+        </div>
+
+        <button class="btn-save" onclick="saveToSummary()">+ บันทึกราคาสินค้ารวมยอดนี้</button>
+
+        <div class="summary-box">
+            <div class="summary-title">
+                <span>📊 ยอดสะสมวันนี้</span>
+                <button class="btn-clear-summary" onclick="clearSummary()">❌ ล้างยอดวันนี้</button>
+            </div>
+            <div class="summary-row">
+                <div class="summary-left">
+                    <span id="summaryCount" style="font-size: 11px; color:#6c757d;">บันทึกแล้ว: 0 รายการ</span>
+                    <button class="btn-toggle-view" onclick="switchView('report')">📋 สรุป</button>
+                </div>
+                <div>
+                    <span class="summary-value" id="totalSummary">0.00</span>
+                    <span style="font-size: 13px; margin-left:2px;">บาท</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row-group">
-        <div class="calc-box box-x">
-            <span class="label-text">เงินเราที่รัฐแบ่งให้ 60%</span>
-            <div class="input-wrapper">
-                <input type="number" id="inputX" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromX()">
-                <span class="unit-text">บาท</span>
-            </div>
+    <div id="reportView">
+        <div class="report-header">
+            <span class="report-title">📋 สรุปแต่ละรายการ</span>
+            <button class="btn-toggle-view" onclick="switchView('calc')">⬅️ ย้อนกลับ</button>
         </div>
-        <div id="warningX" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
-    </div>
 
-    <div class="row-group">
-        <div class="calc-box box-y">
-            <span class="label-text">เงินสมทบของเรา 40%</span>
-            <div class="input-wrapper">
-                <input type="number" id="inputY" placeholder="0.00" step="any" min="0" max="9999.99" oninput="calculateFromY()">
-                <span class="unit-text">บาท</span>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ที่</th>
+                        <th>รวม (100%)</th>
+                        <th>รัฐช่วย (60%)</th>
+                        <th>เราจ่าย (40%)</th>
+                    </tr>
+                </thead>
+                <tbody id="reportTableBody">
+                    </tbody>
+            </table>
+        </div>
+
+        <div class="summary-box" style="margin-top:0; background-color: #fff8f9; border-color: #fce4ec;">
+            <div class="summary-row">
+                <span style="font-size: 13px; font-weight:700; color:#c2185b;">รวมสะสมทั้งสิ้น:</span>
+                <div>
+                    <span class="summary-value text-pink" id="reportTotalSummary">0.00</span>
+                    <span style="font-size: 13px; margin-left:2px; color:#c2185b; font-weight:700;">บาท</span>
+                </div>
             </div>
         </div>
-        <div id="warningY" class="warning-text">*จุดทศนิยมเศษสตางค์มีการปัดขึ้น</div>
     </div>
 
     <div class="footer-credit">
@@ -235,7 +380,11 @@
 <script>
 const MAX_VAL = 9999.99;
 
-// ฟังก์ชันจำกัดค่าไม่ให้เกิน 9999.99
+// ดึงข้อมูลเก่ามาแสดงทันทีที่เปิดแอป
+window.onload = function() {
+    displaySummary();
+};
+
 function enforceMaxLength(inputElement) {
     let val = parseFloat(inputElement.value);
     if (val > MAX_VAL) {
@@ -270,65 +419,131 @@ function checkWarnings(xReal, xCeil, yReal, yCeil) {
 function calculateFromZ() {
     let inputZ = document.getElementById('inputZ');
     let z = enforceMaxLength(inputZ);
-    
     if (isNaN(z) || z <= 0) { clearAll(); return; }
-
     let x = z * 0.60;
     let y = z * 0.40;
-
     let x_ceil = (Math.ceil(x * 100) / 100).toFixed(2);
     let y_ceil = (Math.ceil(y * 100) / 100).toFixed(2);
-
     document.getElementById('inputX').value = x_ceil;
     document.getElementById('inputY').value = y_ceil;
-
     checkWarnings(x, x_ceil, y, y_ceil);
 }
 
 function calculateFromX() {
     let inputX = document.getElementById('inputX');
     let x = enforceMaxLength(inputX);
-    
     if (isNaN(x) || x <= 0) { clearAll(); return; }
-
     let z = x / 0.60;
-    if (z > MAX_VAL) {
-        z = MAX_VAL;
-        x = z * 0.60;
-        inputX.value = (Math.ceil(x * 100) / 100).toFixed(2);
-    }
+    if (z > MAX_VAL) { z = MAX_VAL; x = z * 0.60; inputX.value = (Math.ceil(x * 100) / 100).toFixed(2); }
     let y = z * 0.40;
-
     let z_ceil = (Math.ceil(z * 100) / 100).toFixed(2);
     let y_ceil = (Math.ceil(y * 100) / 100).toFixed(2);
-
     document.getElementById('inputZ').value = z_ceil;
     document.getElementById('inputY').value = y_ceil;
-
     checkWarnings(x, parseFloat(inputX.value), y, y_ceil);
 }
 
 function calculateFromY() {
     let inputY = document.getElementById('inputY');
     let y = enforceMaxLength(inputY);
-    
     if (isNaN(y) || y <= 0) { clearAll(); return; }
-
     let z = y / 0.40;
-    if (z > MAX_VAL) {
-        z = MAX_VAL;
-        y = z * 0.40;
-        inputY.value = (Math.ceil(y * 100) / 100).toFixed(2);
-    }
+    if (z > MAX_VAL) { z = MAX_VAL; y = z * 0.40; inputY.value = (Math.ceil(y * 100) / 100).toFixed(2); }
     let x = z * 0.60;
-
     let z_ceil = (Math.ceil(z * 100) / 100).toFixed(2);
     let x_ceil = (Math.ceil(x * 100) / 100).toFixed(2);
-
     document.getElementById('inputZ').value = z_ceil;
     document.getElementById('inputX').value = x_ceil;
-
     checkWarnings(x, x_ceil, y, parseFloat(inputY.value));
+}
+
+// ฟังก์ชันสลับหน้าจอคำนวณ กับ หน้าจอสรุปตาราง
+function switchView(view) {
+    if (view === 'report') {
+        document.getElementById('calculatorView').style.display = 'none';
+        document.getElementById('reportView').style.display = 'block';
+        buildReportTable(); // สร้างตารางทุกครั้งที่กดเข้าดูหน้าสรุป
+    } else {
+        document.getElementById('calculatorView').style.display = 'block';
+        document.getElementById('reportView').style.display = 'none';
+    }
+}
+
+// บันทึกข้อมูลลง localStorage (เพิ่มการจัดเก็บแบบอาร์เรย์รายรายการ)
+function saveToSummary() {
+    let z_input = document.getElementById('inputZ').value;
+    let x_input = document.getElementById('inputX').value;
+    let y_input = document.getElementById('inputY').value;
+
+    if (!z_input || parseFloat(z_input) <= 0) {
+        alert("กรุณากรอกจำนวนเงินให้เรียบร้อยก่อนบันทึกครับ");
+        return;
+    }
+
+    let z = parseFloat(z_input).toFixed(2);
+    let x = parseFloat(x_input).toFixed(2);
+    let y = parseFloat(y_input).toFixed(2);
+
+    // ดึงอาเรย์รายการเก่า หรือสร้างขึ้นมาใหม่หากยังไม่เคยมี
+    let itemsList = JSON.parse(localStorage.getItem('shop_items_list')) || [];
+    
+    // เพิ่มรายการใหม่เข้าไป
+    itemsList.push({ z: z, x: x, y: y });
+    
+    // คำนวณยอดรวมใหม่
+    let newTotal = itemsList.reduce((sum, item) => sum + parseFloat(item.z), 0);
+
+    // บันทึกค่าทั้งหมดกลับไปที่คลังข้อมูลเครื่อง
+    localStorage.setItem('shop_items_list', JSON.stringify(itemsList));
+    localStorage.setItem('shop_total_sales', newTotal);
+    localStorage.setItem('shop_sales_count', itemsList.length);
+
+    displaySummary();
+    clearAll();
+}
+
+// อัปเดตตัวเลขแสดงผลสะสมหน้าแรก
+function displaySummary() {
+    let currentTotal = parseFloat(localStorage.getItem('shop_total_sales')) || 0;
+    let currentCount = parseInt(localStorage.getItem('shop_sales_count')) || 0;
+
+    document.getElementById('totalSummary').innerText = currentTotal.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('reportTotalSummary').innerText = currentTotal.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    document.getElementById('summaryCount').innerText = "บันทึกแล้ว: " + currentCount + " รายการ";
+}
+
+// ฟังก์ชันดึงอาเรย์มาสร้างแถวตารางแบบเรียลไทม์
+function buildReportTable() {
+    let itemsList = JSON.parse(localStorage.getItem('shop_items_list')) || [];
+    let tbody = document.getElementById('reportTableBody');
+    tbody.innerHTML = ""; // ล้างแถวเก่าออกก่อน
+
+    if (itemsList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="empty-row">ยังไม่มีรายการบันทึกของวันนี้</td></tr>`;
+        return;
+    }
+
+    // วนลูปสร้างแถวตารางจากข้อมูลที่บันทึกไว้
+    itemsList.forEach((item, index) => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td style="color:#6c757d; font-weight:500;">${index + 1}</td>
+            <td class="text-pink">${parseFloat(item.z).toLocaleString('th-TH', {minimumFractionDigits: 2})}</td>
+            <td class="text-blue">${parseFloat(item.x).toLocaleString('th-TH', {minimumFractionDigits: 2})}</td>
+            <td class="text-green">${parseFloat(item.y).toLocaleString('th-TH', {minimumFractionDigits: 2})}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function clearSummary() {
+    if(confirm("คุณต้องการล้างยอดสะสมและรายละเอียดของวันนี้ทั้งหมดใช่หรือไม่?")) {
+        localStorage.removeItem('shop_total_sales');
+        localStorage.removeItem('shop_sales_count');
+        localStorage.removeItem('shop_items_list');
+        displaySummary();
+        buildReportTable();
+    }
 }
 </script>
 
